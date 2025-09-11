@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Start Screen-Tori.unity
+    guid: 0a3613c6c46aa0044989f160333c438d
+  - enabled: 0
     path: Assets/Scenes/Alex Character testing.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    guid: d3a7653fa39478e4d9741d88dfcba0a1
+  - enabled: 1
+    path: Assets/Scenes/ToriH Whiteboxing.unity
+    guid: 719a39006dbfa3a4686ca2f2dc8715b1
   m_configObjects: {}
