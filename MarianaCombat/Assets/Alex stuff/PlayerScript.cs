@@ -4,15 +4,17 @@ using System;
 
 public class PlayerScript : MonoBehaviour
 {
-    int currentHealth;
+    public int currentHealth;
     public int maxHealth, playerTakeDamageCooldownSeconds;
     public float parryDuration, attackDuration;
     public GameObject weapon;
-    bool canTakeDamage, isParrying, isAttacking;
+    bool isParrying, isAttacking;
+    public bool canTakeDamage;
 
     void Start()
     {
         currentHealth = maxHealth;
+        canTakeDamage = true;
     }
 
     void Update()
@@ -41,25 +43,7 @@ public class PlayerScript : MonoBehaviour
         isAttacking = false;
     }
 
-    void PlayerTakesDamage(int damage)
-    {
-        currentHealth -= damage;
-        if (currentHealth <= 0)
-        {
-            print("Game Over");
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy" && canTakeDamage)
-        {
-            PlayerTakesDamage(collision.gameObject.GetComponent<EnemyScript>().damage);
-            StartCoroutine(DamageCooldown());
-        }
-    }
-
-    IEnumerator DamageCooldown()
+    public IEnumerator DamageCooldown()
     {
         canTakeDamage = false;
         yield return new WaitForSeconds(playerTakeDamageCooldownSeconds);
