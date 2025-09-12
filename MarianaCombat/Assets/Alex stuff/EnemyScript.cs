@@ -13,6 +13,7 @@ public class EnemyScript : MonoBehaviour
     {
         player = FindFirstObjectByType<PlayerScript>();
         health = maxHealth;
+        canTakeDamage = true;
     }
 
     // Update is called once per frame
@@ -36,8 +37,14 @@ public class EnemyScript : MonoBehaviour
         StartCoroutine(DamageCooldown());
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Enemy colliding with " + collision.gameObject.name);
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
+
         if (collision.gameObject.GetComponent<WeaponScript>() && canTakeDamage)
         {
             Debug.Log("Enemy hit by weapon for " + collision.GetComponent<WeaponScript>().damage + "damage");
