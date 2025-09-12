@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class TMEnemySpawner : MonoBehaviour
 {
+    public List<> enemySpawnPoints;
+    public GameObject enemyPrefab;
+
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +20,11 @@ public class TMEnemySpawner : MonoBehaviour
     {
         
     }
+
+    public void SpawnEnemy()
+    {
+        Instantiate(enemyPrefab);
+    }
+
+
 }
