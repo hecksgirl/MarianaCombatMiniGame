@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    public KeyCode attackKey = KeyCode.Mouse0;
-    public KeyCode parryKey = KeyCode.Mouse1;
-    public KeyCode pauseKey = KeyCode.Escape;
-    public KeyCode AltPauseKey = KeyCode.P;
-
+    public KeyCode pauseKey = KeyCode.Escape, AltPauseKey = KeyCode.P;
     public static PlayerInput Instance;
 
     // Start is called before the first frame update
@@ -16,5 +12,10 @@ public class PlayerInput : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
+    }
+
+    private void Start()
+    {
+        
     }
 }

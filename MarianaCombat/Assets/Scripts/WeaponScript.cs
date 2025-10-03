@@ -10,19 +10,21 @@ public class WeaponScript : MonoBehaviour
     public bool isParrying, isAttacking;
     public GameObject player;
     Animator animator;
-    KeyCode parryKey;
-    KeyCode attackKey;
-    KeyCode pauseKey;
-    KeyCode AltPauseKey;
+    public KeyCode pauseKey, AltPauseKey, UpAttack, DownAttack, LeftAttack, RightAttack, parryKey, UpLeftAttack, UpRightAttack, DownLeftAttack, DownRightAttack;
     public StaminaBar staminaBar;
+
+    private enum AttackDirection
+    {
+        up, down, left, right, upLeft, upRight, downLeft, downRight, neutral
+    }
+
+    AttackDirection attackDirection;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         player = FindFirstObjectByType<PlayerScript>().gameObject;
 
-        parryKey = PlayerInput.Instance.attackKey;
-        attackKey = PlayerInput.Instance.parryKey;
         pauseKey = PlayerInput.Instance.pauseKey;
         AltPauseKey = PlayerInput.Instance.AltPauseKey;
 
@@ -34,9 +36,31 @@ public class WeaponScript : MonoBehaviour
 
     void Update()
     {
+        attackDirection = AttackDirection.neutral;
+
+        if (Input.GetKey(UpAttack))
+        {
+            Debug.Log("up attack");
+            attackDirection = AttackDirection.up;
+        }
+        else if (Input.GetKey(DownAttack))
+            attackDirection = AttackDirection.down;
+        else if (Input.GetKey(LeftAttack))
+            attackDirection = AttackDirection.left;
+        else if (Input.GetKey(RightAttack))
+            attackDirection = AttackDirection.right;
+        else if (Input.GetKey(UpLeftAttack))
+            attackDirection = AttackDirection.upLeft;
+        else if (Input.GetKey(UpRightAttack))
+            attackDirection = AttackDirection.upRight;
+        else if (Input.GetKey(DownLeftAttack))
+            attackDirection = AttackDirection.downLeft;
+        else if (Input.GetKey(DownRightAttack))
+            attackDirection = AttackDirection.downRight;
+
         HandleWeaponMovement();
 
-        if (Input.GetKeyDown(attackKey) && Cursor.visible)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && Cursor.visible)
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
@@ -74,23 +98,41 @@ public class WeaponScript : MonoBehaviour
 
     void HandleWeaponMovement()
     {
-        if (player == null) return;
-
-        //get mouse position in world space
-        Vector3 mouseScreenPosition = Input.mousePosition;
-        mouseScreenPosition.z = Camera.main.WorldToScreenPoint(player.transform.position).z;
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
-
-        //direction from player to mouse
-        Vector3 playerPosition = player.transform.position;
-        Vector3 direction = (mouseWorldPosition - playerPosition).normalized;
-
-        //weapon orbiting
-        transform.position = playerPosition + direction * orbitDistance;
-
-        //rotate weapon so it faces the mouse- doesn't work
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle + 90); // adjust +90 for sprite art
+        switch (attackDirection)
+        {
+            case AttackDirection.up:
+                transform.localPosition = new Vector3(0, orbitDistance, 0);
+                transform.localRotation = Quaternion.Euler(0, 0, 0);
+                break;
+            case AttackDirection.down:
+                transform.localPosition = new Vector3(0, -orbitDistance, 0);
+                transform.localRotation = Quaternion.Euler(0, 0, 180);
+                break;
+            case AttackDirection.left:
+                transform.localPosition = new Vector3(-orbitDistance, 0, 0);
+                transform.localRotation = Quaternion.Euler(0, 0, 90);
+                break;
+            case AttackDirection.right:
+                transform.localPosition = new Vector3(orbitDistance, 0, 0);
+                transform.localRotation = Quaternion.Euler(0, 0, -90);
+                break;
+            case AttackDirection.upLeft:
+                transform.localPosition = new Vector3(-orbitDistance / Mathf.Sqrt(2), orbitDistance / Mathf.Sqrt(2), 0);
+                transform.localRotation = Quaternion.Euler(0, 0, 45);
+                break;
+            case AttackDirection.upRight:
+                transform.localPosition = new Vector3(orbitDistance / Mathf.Sqrt(2), orbitDistance / Mathf.Sqrt(2), 0);
+                transform.localRotation = Quaternion.Euler(0, 0, -45);
+                break;
+            case AttackDirection.downLeft:
+                transform.localPosition = new Vector3(-orbitDistance / Mathf.Sqrt(2), -orbitDistance / Mathf.Sqrt(2), 0);
+                transform.localRotation = Quaternion.Euler(0, 0, 135);
+                break;
+            case AttackDirection.downRight:
+                transform.localPosition = new Vector3(orbitDistance / Mathf.Sqrt(2), -orbitDistance / Mathf.Sqrt(2), 0);
+                transform.localRotation = Quaternion.Euler(0, 0, -135);
+                break;
+        }
     }
 
 }
