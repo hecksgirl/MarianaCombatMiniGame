@@ -18,6 +18,9 @@ public class WeaponScript : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
+        player = FindFirstObjectByType<PlayerScript>().gameObject;
+
         parryKey = PlayerInput.Instance.attackKey;
         attackKey = PlayerInput.Instance.parryKey;
         pauseKey = PlayerInput.Instance.pauseKey;
@@ -29,9 +32,6 @@ public class WeaponScript : MonoBehaviour
 
         isParrying = false;
         isAttacking = false;
-
-        animator = GetComponent<Animator>();
-        player = FindFirstObjectByType<PlayerScript>().gameObject;
     }
 
     void Update()
@@ -40,11 +40,11 @@ public class WeaponScript : MonoBehaviour
 
         if (Input.GetKeyDown(attackKey) && Cursor.visible)
         {
-            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && Cursor.visible)
+        else if ((Input.GetKeyDown(pauseKey) || Input.GetKeyDown(AltPauseKey)) && !Cursor.visible)
         {
-            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && !isParrying)
