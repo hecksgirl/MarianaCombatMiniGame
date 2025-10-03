@@ -99,11 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc265dcecb72c84086adce5fe714885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 5
   maxHealth: 5
   playerTakeDamageCooldownSeconds: 1
-  parryDuration: 1
-  attackDuration: 1
   weapon: {fileID: 8579243880356677183}
+  canTakeDamage: 0
 --- !u!58 &3798731209083467310
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -152,12 +152,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6092428092490624986}
     - target: {fileID: 6421610252535646264, guid: 9085343206823114b80ee839cad39ae3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421610252535646264, guid: 9085343206823114b80ee839cad39ae3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421610252535646264, guid: 9085343206823114b80ee839cad39ae3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421610252535646264, guid: 9085343206823114b80ee839cad39ae3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0333
+      value: 0.012402253
       objectReference: {fileID: 0}
     - target: {fileID: 6421610252535646264, guid: 9085343206823114b80ee839cad39ae3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9144
+      value: -0.16
       objectReference: {fileID: 0}
     - target: {fileID: 6421610252535646264, guid: 9085343206823114b80ee839cad39ae3, type: 3}
       propertyPath: m_LocalPosition.z

@@ -27,19 +27,12 @@ public class EnemyScript : MonoBehaviour
             MoveEnemy();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage()
     {
-        health -= damage;
-
-        if (health <= 0)
-        {
-            EnemyManager.Instance.enemies.Remove(this);
-            GameManager.Instance.UpdateScore(1);
-            EnemyManager.Instance.SpawnEnemy(gameObject);
-            Destroy(gameObject);
-        }
-
-        StartCoroutine(DamageCooldown());
+        EnemyManager.Instance.enemies.Remove(this);
+        GameManager.Instance.UpdateScore(1);
+        EnemyManager.Instance.SpawnEnemy(gameObject);
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -50,14 +43,13 @@ public class EnemyScript : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("Enemy colliding with " + collision.gameObject.name);
-        if (collision.gameObject.GetComponent<WeaponScript>() && canTakeDamage)
+        if (collision.GetComponent<WeaponScript>() && collision.GetComponent<WeaponScript>().isAttacking 
+            && canTakeDamage)
         {
-            TakeDamage(collision.gameObject.GetComponent<WeaponScript>().damage);
+            TakeDamage();
         }
         if (collision.gameObject.tag == "Player" && player.canTakeDamage)
         {
-            Debug.Log("Enemy hit player");
             DealDamage(damage);
             StartCoroutine(player.DamageCooldown());
         }
@@ -85,12 +77,5 @@ public class EnemyScript : MonoBehaviour
         {
             print("Game Over");
         }
-    }
-
-    IEnumerator DamageCooldown()
-    {
-        canTakeDamage = false;
-        yield return new WaitForSeconds(damageCooldown);
-        canTakeDamage = true;
     }
 }

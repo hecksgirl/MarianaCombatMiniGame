@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Instance = this;
-
+        score = 0;
+        scoreText.text = "Score: " + score;
     }
 
     // Update is called once per frame
