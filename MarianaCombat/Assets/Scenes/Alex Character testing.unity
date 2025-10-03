@@ -1004,6 +1004,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4195869522293656142, guid: 4986f9b6a013b7f4c9f7ab053b15a671, type: 3}
+      propertyPath: orbitDistance
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6092428092490624986, guid: 4986f9b6a013b7f4c9f7ab053b15a671, type: 3}
       propertyPath: m_Name
       value: player
@@ -1355,6 +1359,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1956404993}
   - component: {fileID: 1956404992}
+  - component: {fileID: 1956404994}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1391,6 +1396,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1956404994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956404991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df0a217eb1b91224aba6ac97d30f9fba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackKey: 323
+  parryKey: 324
+  pauseKey: 27
+  AltPauseKey: 112
 --- !u!4 &1960176283 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8154130916036840679, guid: 4dcd412f17df0f54d94ca167625ed5b6, type: 3}
