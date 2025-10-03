@@ -12,8 +12,9 @@ public class PlayerInput : MonoBehaviour
     public static PlayerInput Instance;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+            Instance = this;
     }
 }

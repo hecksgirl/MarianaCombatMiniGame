@@ -1,18 +1,33 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StaminaBar : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Slider slider;
+    public float staminaCost, stamina, maxStamina, staminaGainPerSecond;
+
     void Start()
     {
-        
+        slider = GetComponent<Slider>();
+        stamina = maxStamina;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        IncreaseStamina();
+        slider.value = stamina/maxStamina;
+    }
+
+    public void DecreaseStamina()
+    {
+        stamina -= staminaCost;
+    }
+
+    void IncreaseStamina()
+    {
+        stamina += staminaGainPerSecond * Time.deltaTime;
     }
 }

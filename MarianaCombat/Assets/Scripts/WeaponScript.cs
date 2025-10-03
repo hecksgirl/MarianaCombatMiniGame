@@ -5,7 +5,6 @@ using System;
 public class WeaponScript : MonoBehaviour
 {
     public float parryDuration, attackDuration;
-    float weaponScaler, weaponEx, minScale;
     public int damage;
     public float orbitDistance;
     public bool isParrying, isAttacking;
@@ -15,6 +14,7 @@ public class WeaponScript : MonoBehaviour
     KeyCode attackKey;
     KeyCode pauseKey;
     KeyCode AltPauseKey;
+    public StaminaBar staminaBar;
 
     private void Start()
     {
@@ -26,12 +26,10 @@ public class WeaponScript : MonoBehaviour
         pauseKey = PlayerInput.Instance.pauseKey;
         AltPauseKey = PlayerInput.Instance.AltPauseKey;
 
-        weaponScaler = 0.92f;
-        weaponEx = 18.21f;
-        minScale = 0.7f;
-
         isParrying = false;
         isAttacking = false;
+
+        staminaBar = FindFirstObjectByType<StaminaBar>();
     }
 
     void Update()
@@ -51,7 +49,7 @@ public class WeaponScript : MonoBehaviour
         {
             StartCoroutine(Parry());
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !isAttacking)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !isAttacking && staminaBar.stamina>0)
         {
             StartCoroutine(Attack());
         }
@@ -69,6 +67,7 @@ public class WeaponScript : MonoBehaviour
         Debug.Log("Attack");
         isAttacking = true;
         animator.SetTrigger("Attack");
+        staminaBar.DecreaseStamina();
         yield return new WaitForSeconds(attackDuration);
         isAttacking = false;
     }
