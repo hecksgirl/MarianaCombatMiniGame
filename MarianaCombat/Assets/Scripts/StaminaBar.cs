@@ -1,19 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StaminaBar : MonoBehaviour
 {
-    private Slider slider;
-    public Image fill;
+    private Image fill;
     public Color defaultSliderColor;
     public float staminaCost, stamina, maxStamina, staminaGainPerSecond;
 
     void Start()
     {
-        slider = GetComponent<Slider>();
+        fill = GetComponent<Image>();
         stamina = maxStamina;
         fill.color = defaultSliderColor;
     }
@@ -27,17 +23,18 @@ public class StaminaBar : MonoBehaviour
     public void DecreaseStamina()
     {
         stamina -= staminaCost;
+        Debug.Log("Stamina Decreased");
     }
 
     void IncreaseStamina()
     {
-        stamina += staminaGainPerSecond * Time.deltaTime;
-        Mathf.Clamp(stamina, -staminaCost, maxStamina);
+        if(stamina < maxStamina)
+            stamina += staminaGainPerSecond * Time.deltaTime;
     }
 
     void HandleSliderValues()
     {
-        slider.value = stamina / maxStamina;
+        fill.fillAmount = stamina / maxStamina;
         fill.color = Color.Lerp(Color.red, defaultSliderColor, stamina / maxStamina);
         Debug.Log(fill.color);
     }

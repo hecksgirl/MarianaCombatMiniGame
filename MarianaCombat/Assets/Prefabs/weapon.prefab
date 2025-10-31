@@ -827,10 +827,22 @@ MonoBehaviour:
   parryDuration: 2
   attackDuration: 0.2
   damage: 2
-  orbitDistance: 0
-  isParrying: 0
+  orbitDistance: 2
+  isParrying: 1
   isAttacking: 0
   player: {fileID: 0}
+  pauseKey: 112
+  AltPauseKey: 0
+  UpAttack: 264
+  DownAttack: 258
+  LeftAttack: 260
+  RightAttack: 262
+  parryKey: 261
+  UpLeftAttack: 263
+  UpRightAttack: 265
+  DownLeftAttack: 257
+  DownRightAttack: 259
+  staminaBar: {fileID: 0}
 --- !u!61 &1872897546294019698
 BoxCollider2D:
   m_ObjectHideFlags: 0
