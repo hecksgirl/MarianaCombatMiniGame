@@ -6,7 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance;
     public List<EnemyScript> enemies;
-    public GameObject enemyPrefab, enemyBubbleExplode;
+    public GameObject enemyPrefab, enemyBubbleExplode, greatWhitePrefab;
     public SpawnPoint[] spawnPoints;
     public int spawnWaitTime;
 
@@ -37,5 +37,10 @@ public class EnemyManager : MonoBehaviour
         Instantiate(enemyPrefab, spawnPoints[randomIndex].transform.position, Quaternion.identity);
         yield return new WaitForSeconds(1);
         Destroy(ps);
+    }
+
+    public void SpawnGreatWhite()
+    {
+        GreatWhite gw = Instantiate(greatWhitePrefab, new Vector3(-20, 0, 0), Quaternion.identity).GetComponent<GreatWhite>();
     }
 }

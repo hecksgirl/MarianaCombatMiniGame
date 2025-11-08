@@ -43,12 +43,13 @@ public class EnemyScript : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.GetComponent<WeaponScript>() && collision.GetComponent<WeaponScript>().isAttacking 
-            && canTakeDamage)
+        WeaponScript weapon = collision.GetComponent<WeaponScript>();
+
+        if (weapon != null && weapon.isAttacking && canTakeDamage)
         {
             TakeDamage();
         }
-        if (collision.gameObject.tag == "Player" && player.canTakeDamage)
+        if (collision.gameObject.CompareTag("Player") && player.canTakeDamage)
         {
             DealDamage(damage);
             StartCoroutine(player.DamageCooldown());
@@ -71,11 +72,9 @@ public class EnemyScript : MonoBehaviour
     void DealDamage(int damage)
     {
         player.currentHealth -= damage;
-        Debug.Log("Health: " + player.currentHealth);
-        GameManager.Instance.UpdateScore(-1);
         if (player.currentHealth <= 0)
         {
-            print("Game Over");
+            GameManager.Instance.GameOver();
         }
     }
 }

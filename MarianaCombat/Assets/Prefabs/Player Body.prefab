@@ -166,7 +166,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -268,17 +268,9 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 6092428092490624986}
-    - target: {fileID: 6421610252535646264, guid: 9085343206823114b80ee839cad39ae3, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6421610252535646264, guid: 9085343206823114b80ee839cad39ae3, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6421610252535646264, guid: 9085343206823114b80ee839cad39ae3, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
+    - target: {fileID: 4066142561576745470, guid: 9085343206823114b80ee839cad39ae3, type: 3}
+      propertyPath: m_PreviewTimeScale
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6421610252535646264, guid: 9085343206823114b80ee839cad39ae3, type: 3}
       propertyPath: m_LocalPosition.x

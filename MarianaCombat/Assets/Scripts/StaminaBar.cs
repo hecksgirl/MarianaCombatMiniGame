@@ -23,7 +23,6 @@ public class StaminaBar : MonoBehaviour
     public void DecreaseStamina()
     {
         stamina -= staminaCost;
-        Debug.Log("Stamina Decreased");
     }
 
     void IncreaseStamina()
@@ -36,6 +35,5 @@ public class StaminaBar : MonoBehaviour
     {
         fill.fillAmount = stamina / maxStamina;
         fill.color = Color.Lerp(Color.red, defaultSliderColor, stamina / maxStamina);
-        Debug.Log(fill.color);
     }
 }

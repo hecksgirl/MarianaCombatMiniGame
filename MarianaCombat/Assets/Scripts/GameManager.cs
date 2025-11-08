@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public TextMeshProUGUI scoreText;
-    public int score;
+    public int score, numberOfEnemiesPerWave;
+    private int currentWaveNumber;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,17 @@ public class GameManager : MonoBehaviour
     {
         score += scoreChange;
         scoreText.text = "Score: " + score;
+        if (score % numberOfEnemiesPerWave == 0)
+        { 
+            currentWaveNumber++;
+            EnemyManager.Instance.SpawnGreatWhite();
+
+        }
+
     }
 
+    public void GameOver()
+    {
 
+    }
 }

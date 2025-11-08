@@ -4,10 +4,10 @@ using System;
 
 public class WeaponScript : MonoBehaviour
 {
-    public float parryDuration, attackDuration;
+    public float parryDuration;
     public int damage;
     public float orbitDistance;
-    public bool isParrying, isAttacking;
+    public bool isAttacking;
     public GameObject player;
     Animator animator;
     public KeyCode pauseKey, AltPauseKey, UpAttack, DownAttack, LeftAttack, RightAttack, parryKey, UpLeftAttack, UpRightAttack, DownLeftAttack, DownRightAttack;
@@ -28,7 +28,6 @@ public class WeaponScript : MonoBehaviour
         pauseKey = PlayerInput.Instance.pauseKey;
         AltPauseKey = PlayerInput.Instance.AltPauseKey;
 
-        isParrying = false;
         isAttacking = false;
 
         staminaBar = FindFirstObjectByType<StaminaBar>();
@@ -39,10 +38,7 @@ public class WeaponScript : MonoBehaviour
         attackDirection = AttackDirection.neutral;
 
         if (Input.GetKey(UpAttack))
-        {
-            Debug.Log("up attack");
             attackDirection = AttackDirection.up;
-        }
         else if (Input.GetKey(DownAttack))
             attackDirection = AttackDirection.down;
         else if (Input.GetKey(LeftAttack))
@@ -69,37 +65,48 @@ public class WeaponScript : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isParrying)
+        if (Input.GetKeyDown(parryKey))
         {
-            StartCoroutine(Parry());
+            Parry();
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !isAttacking && staminaBar.stamina>0)
+        if (attackDirection!= AttackDirection.neutral && !isAttacking && staminaBar.stamina>0)
         {
             StartCoroutine(Attack());
         }
     }
 
-    IEnumerator Parry()
-    {
-        isParrying = true;
-        yield return new WaitForSeconds(parryDuration);
-        isParrying = false;
-    }
-
     IEnumerator Attack()
     {
-        Debug.Log("Attack");
         isAttacking = true;
         animator.SetTrigger("Attack");
         staminaBar.DecreaseStamina();
-        yield return new WaitForSeconds(attackDuration);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         isAttacking = false;
+    }
+
+    void Parry()
+    {
+        GreatWhite gw= FindFirstObjectByType<GreatWhite>();
+        animator.SetTrigger("Parry");
+        if (gw != null && gw.attackSuccessful)
+        { 
+            gw.attackSuccessful = false;
+            Debug.Log("Parry successful");
+        }
+        else
+        {
+            Debug.Log("Parry failed");
+        }
     }
 
     void HandleWeaponMovement()
     {
         switch (attackDirection)
         {
+            case AttackDirection.neutral:
+                transform.localPosition = new Vector3(0, 0, 0);
+                transform.localRotation = Quaternion.Euler(0, 0, 0);
+                break;
             case AttackDirection.up:
                 transform.localPosition = new Vector3(0, orbitDistance, 0);
                 transform.localRotation = Quaternion.Euler(0, 0, 0);
