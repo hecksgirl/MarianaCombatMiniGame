@@ -8,9 +8,11 @@ public class PlayerScript : MonoBehaviour
     public int maxHealth, playerTakeDamageCooldownSeconds;
     public GameObject weapon;
     public bool canTakeDamage;
+    public PlayerHealthBar healthBar;
 
     void Start()
     {
+        healthBar = FindFirstObjectByType<PlayerHealthBar>();
         currentHealth = maxHealth;
         canTakeDamage = true;
     }

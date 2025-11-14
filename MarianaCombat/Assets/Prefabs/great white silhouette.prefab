@@ -120,4 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   silhouette: {fileID: 21300000, guid: 1515ff532c92b3e4fb26d0b48a88a2e2, type: 3}
-  attackSprite: {fileID: -2413806693520163455, guid: fa0216bd51b60d34782a66e6ee6aca58, type: 3}
+  attackSprite: {fileID: 21300000, guid: 1aa001c6f0fa0364e92414a83fb51444, type: 3}
+  isAttacking: 0
+  attackSuccessful: 0
+  graceSeconds: 0
+  damage: 0

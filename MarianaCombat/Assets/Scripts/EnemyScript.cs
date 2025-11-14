@@ -72,6 +72,7 @@ public class EnemyScript : MonoBehaviour
     void DealDamage(int damage)
     {
         player.currentHealth -= damage;
+        player.healthBar.UpdateHealthBar(player.currentHealth/(float)player.maxHealth);
         if (player.currentHealth <= 0)
         {
             GameManager.Instance.GameOver();
