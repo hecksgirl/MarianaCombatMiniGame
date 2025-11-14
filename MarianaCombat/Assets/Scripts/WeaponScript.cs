@@ -78,9 +78,13 @@ public class WeaponScript : MonoBehaviour
     IEnumerator Attack()
     {
         isAttacking = true;
-        animator.SetTrigger("Attack");
+
+        AudioManager.Instance.PlaySwordSwing();
+
+        animator.SetBool("Attacking", true);
         staminaBar.DecreaseStamina();
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        animator.SetBool("Attacking", false);
         isAttacking = false;
     }
 

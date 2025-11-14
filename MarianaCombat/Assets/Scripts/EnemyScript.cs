@@ -52,7 +52,7 @@ public class EnemyScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && player.canTakeDamage)
         {
             DealDamage(damage);
-            StartCoroutine(player.DamageCooldown());
+            player.DamCooldown();
         }
     }
 
@@ -73,6 +73,8 @@ public class EnemyScript : MonoBehaviour
     {
         player.currentHealth -= damage;
         player.healthBar.UpdateHealthBar(player.currentHealth/(float)player.maxHealth);
+        Debug.Log("PlayerHealth: " + player.currentHealth);
+
         if (player.currentHealth <= 0)
         {
             GameManager.Instance.GameOver();

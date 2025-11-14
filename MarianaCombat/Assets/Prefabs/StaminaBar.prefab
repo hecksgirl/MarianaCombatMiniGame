@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5901f87f588cc7e42afcd2418cac4b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSliderColor: {r: 0.6179246, g: 1, b: 0.8619066, a: 0}
+  defaultSliderColor: {r: 0.6179246, g: 1, b: 0.8619066, a: 1}
   staminaCost: 3
   stamina: 0
   maxStamina: 10

@@ -17,10 +17,18 @@ public class PlayerScript : MonoBehaviour
         canTakeDamage = true;
     }
 
+    public void DamCooldown()
+    { 
+        StartCoroutine(DamageCooldown());
+    }
+
+
     public IEnumerator DamageCooldown()
     {
         canTakeDamage = false;
+        Debug.Log("Player damage cooldown started.");
         yield return new WaitForSeconds(playerTakeDamageCooldownSeconds);
         canTakeDamage = true;
+        Debug.Log("Player can take damage again.");
     }
 }
