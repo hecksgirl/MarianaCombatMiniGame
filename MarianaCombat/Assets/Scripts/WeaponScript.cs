@@ -10,7 +10,7 @@ public class WeaponScript : MonoBehaviour
     public bool isAttacking;
     public GameObject player;
     Animator animator;
-    public KeyCode pauseKey, AltPauseKey, UpAttack, DownAttack, LeftAttack, RightAttack, parryKey, UpLeftAttack, UpRightAttack, DownLeftAttack, DownRightAttack;
+    public KeyCode pauseKey, AltPauseKey, UpAttack, DownAttack, LeftAttack, RightAttack, parryKey;
     public StaminaBar staminaBar;
 
     private enum AttackDirection
@@ -45,13 +45,13 @@ public class WeaponScript : MonoBehaviour
             attackDirection = AttackDirection.left;
         else if (Input.GetKey(RightAttack))
             attackDirection = AttackDirection.right;
-        else if (Input.GetKey(UpLeftAttack))
+        else if (Input.GetKey(UpAttack)&&Input.GetKey(LeftAttack))
             attackDirection = AttackDirection.upLeft;
-        else if (Input.GetKey(UpRightAttack))
+        else if (Input.GetKey(UpAttack)&&Input.GetKey(RightAttack))
             attackDirection = AttackDirection.upRight;
-        else if (Input.GetKey(DownLeftAttack))
+        else if (Input.GetKey(DownAttack)&&Input.GetKey(LeftAttack))
             attackDirection = AttackDirection.downLeft;
-        else if (Input.GetKey(DownRightAttack))
+        else if (Input.GetKey(DownAttack)&&Input.GetKey(RightAttack))
             attackDirection = AttackDirection.downRight;
 
         HandleWeaponMovement();

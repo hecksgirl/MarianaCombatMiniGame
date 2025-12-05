@@ -705,15 +705,11 @@ MonoBehaviour:
   player: {fileID: 0}
   pauseKey: 112
   AltPauseKey: 0
-  UpAttack: 264
-  DownAttack: 258
-  LeftAttack: 260
-  RightAttack: 262
-  parryKey: 261
-  UpLeftAttack: 263
-  UpRightAttack: 265
-  DownLeftAttack: 257
-  DownRightAttack: 259
+  UpAttack: 273
+  DownAttack: 274
+  LeftAttack: 276
+  RightAttack: 275
+  parryKey: 32
   staminaBar: {fileID: 0}
 --- !u!61 &1872897546294019698
 BoxCollider2D:
