@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,21 +12,17 @@ public class GameManager : MonoBehaviour
     PlayerScript player;
     public GameObject gameOverText;
     public float gameDelay = 3f;
+    public bool gameOver;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameOver = false;
         gameOverText.SetActive(false);
         Instance = this;
         score = 0;
         scoreText.text = "Score: " + score;
         player = FindFirstObjectByType<PlayerScript>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void UpdateScore(int scoreChange)
@@ -44,6 +40,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        gameOver = true;
         player.gameObject.SetActive(false);
         gameOverText.SetActive(true);
         StartCoroutine(RestartGameCoroutine());
@@ -52,6 +49,6 @@ public class GameManager : MonoBehaviour
     IEnumerator RestartGameCoroutine()
     {
         yield return new WaitForSeconds(gameDelay);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

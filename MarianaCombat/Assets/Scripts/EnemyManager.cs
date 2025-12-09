@@ -18,12 +18,6 @@ public class EnemyManager : MonoBehaviour
         spawnPoints = FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SpawnEnemy(GameObject enemy)
     {
         StartCoroutine(SpawnEnemyCoroutine(enemy));

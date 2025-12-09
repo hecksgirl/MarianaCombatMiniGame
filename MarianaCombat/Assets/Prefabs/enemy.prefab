@@ -103,7 +103,7 @@ MonoBehaviour:
   damage: 1
   damageCooldown: 1
   player: {fileID: 0}
-  moveSpeed: 1
+  moveSpeed: 0.2
 --- !u!58 &8547949868580720581
 CircleCollider2D:
   m_ObjectHideFlags: 0

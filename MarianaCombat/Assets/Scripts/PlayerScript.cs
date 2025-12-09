@@ -18,7 +18,8 @@ public class PlayerScript : MonoBehaviour
 
     public void DamCooldown()
     { 
-        StartCoroutine(DamageCooldown());
+        if(!GameManager.Instance.gameOver)
+            StartCoroutine(DamageCooldown());
     }
 
 

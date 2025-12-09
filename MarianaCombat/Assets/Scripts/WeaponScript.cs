@@ -37,7 +37,28 @@ public class WeaponScript : MonoBehaviour
     {
         attackDirection = AttackDirection.neutral;
 
-        if (Input.GetKey(UpAttack))
+        
+        if (Input.GetKey(UpAttack)&&Input.GetKey(LeftAttack))
+        {
+            attackDirection = AttackDirection.upLeft;
+            Debug.Log("UpLeft detected");
+        }
+        else if (Input.GetKey(UpAttack)&&Input.GetKey(RightAttack))
+        {
+            attackDirection = AttackDirection.upRight;
+            Debug.Log("UpRight detected");
+        }
+        else if (Input.GetKey(DownAttack)&&Input.GetKey(LeftAttack))
+        {
+            attackDirection = AttackDirection.downLeft;
+            Debug.Log("DownLeft detected");
+        }
+        else if (Input.GetKey(DownAttack)&&Input.GetKey(RightAttack))
+        {
+            attackDirection = AttackDirection.downRight;
+            Debug.Log("DownRight detected");
+        }
+        else if (Input.GetKey(UpAttack))
             attackDirection = AttackDirection.up;
         else if (Input.GetKey(DownAttack))
             attackDirection = AttackDirection.down;
@@ -45,14 +66,6 @@ public class WeaponScript : MonoBehaviour
             attackDirection = AttackDirection.left;
         else if (Input.GetKey(RightAttack))
             attackDirection = AttackDirection.right;
-        else if (Input.GetKey(UpAttack)&&Input.GetKey(LeftAttack))
-            attackDirection = AttackDirection.upLeft;
-        else if (Input.GetKey(UpAttack)&&Input.GetKey(RightAttack))
-            attackDirection = AttackDirection.upRight;
-        else if (Input.GetKey(DownAttack)&&Input.GetKey(LeftAttack))
-            attackDirection = AttackDirection.downLeft;
-        else if (Input.GetKey(DownAttack)&&Input.GetKey(RightAttack))
-            attackDirection = AttackDirection.downRight;
 
         HandleWeaponMovement();
 
@@ -69,7 +82,7 @@ public class WeaponScript : MonoBehaviour
         {
             Parry();
         }
-        if (attackDirection!= AttackDirection.neutral && !isAttacking && staminaBar.stamina>0)
+        if (attackDirection!= AttackDirection.neutral && staminaBar.stamina>0)
         {
             StartCoroutine(Attack());
         }
@@ -90,11 +103,13 @@ public class WeaponScript : MonoBehaviour
 
     void Parry()
     {
+        Debug.Log("Parry attempted");
         GreatWhite gw= FindFirstObjectByType<GreatWhite>();
         animator.SetTrigger("Parry");
         if (gw != null && gw.attackSuccessful)
         { 
             gw.attackSuccessful = false;
+
             Debug.Log("Parry successful");
         }
         else
@@ -145,5 +160,4 @@ public class WeaponScript : MonoBehaviour
                 break;
         }
     }
-
 }

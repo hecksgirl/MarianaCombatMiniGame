@@ -23,8 +23,12 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isTouchingPlayer)
+        if (!isTouchingPlayer && !GameManager.Instance.gameOver)
             MoveEnemy();
+        else
+        {
+            Debug.Log("Enemy stopped moving.");
+        }
     }
 
     public void TakeDamage()

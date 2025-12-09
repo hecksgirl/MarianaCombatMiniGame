@@ -6,7 +6,7 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    public AudioSource weaponSource;
+    public GameObject weaponSourcePrefab;
     public AudioClip[] swordSwingClip;
 
     private void Awake()
@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
     public void PlaySwordSwing()
     {
         int index = Random.Range(0, swordSwingClip.Length);
+        AudioSource weaponSource = Instantiate(weaponSourcePrefab, transform).GetComponent<AudioSource>();
         weaponSource.clip = swordSwingClip[index];
         weaponSource.Play();
     }
